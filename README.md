@@ -23,6 +23,11 @@ Un **servicio web** es un tipo especial de servicio que:
 
 Se llama *web* porque se construye sobre tecnologías propias de la web (como HTTP, URIs y formatos como JSON o XML).
 
+Los servicios web permiten:
+
+- Separar el frontend (cliente) del backend (servidor),
+- Reutilizar lógica de negocio o datos en distintas interfaces (por ejemplo, web, móvil, otros sistemas),
+
 ### Reglas generales para nombres de URIs API REST
 
 - ✅ Usar **nombres de recursos en plural**
