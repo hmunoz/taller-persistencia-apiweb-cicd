@@ -32,13 +32,11 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
 - Conocido como: London school, Mockist style
 - Aparece en el libro *Growing Object-Oriented Software, Guided by Tests*, de Steve Freeman y Nat Pryce.
 
-## Requerimientos
+## Requerimientos (Guía de Teléfonos)
 
-- Una persona conoce sus números de teléfono
-- Una persona tiene un nombre, un apellido y un DNI.
-- El nombre y el apellido debe tener más de 35 caracteres ni menos de 2.
-- El DNI son solo numeros, de 7 u 8 dígitos.
-- No deben existir personas con el mismo DNI.
+- Un contacto conoce una lista de números de teléfono
+- Un contacto posee un nombre que no debe tener más de 35 caracteres ni menos de 2.
+- No deben existir contactos con el mismo nombre.
 - Un número de telefono tiene un código de área y el número en sí.
 - El código de áre tiene 4 dígitos el número un máximo de 7 caracteres y mínimo de 6.
 
