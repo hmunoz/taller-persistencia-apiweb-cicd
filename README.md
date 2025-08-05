@@ -1,7 +1,5 @@
 # Taller - Persistencia, Servicios Web y Testing Automatizado
 
-- Para persistencia usaremos JPA 3.2 y [Hibernate 7](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html)
-
 ## Diseño Bottom-up vs Top-Down
 
 El diseño Top-Down consiste en comenzar con una visión general del sistema y descomponerla en partes más pequeñas y
@@ -32,17 +30,21 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
 - Conocido como: London school, Mockist style
 - Aparece en el libro *Growing Object-Oriented Software, Guided by Tests*, de Steve Freeman y Nat Pryce.
 
-## Requerimientos (Guía de Teléfonos)
+## Requerimientos (Contactos Telefónicos)
 
 - Un contacto conoce una lista de números de teléfono
 - Un contacto posee un nombre que no debe tener más de 35 caracteres ni menos de 2.
 - No deben existir contactos con el mismo nombre.
-- Un número de telefono tiene un código de área y el número en sí.
+- Un número de teléfono tiene un código de área y el número en sí.
 - El código de áre tiene 4 dígitos el número un máximo de 7 caracteres y mínimo de 6.
+- Una agenda conoce todos sus contactos y permite listarlos.
+- La agenda permite agregar contactos.
 
 ## Testing Unitario
 
 ## Persistencia
+
+- Para persistencia usaremos JPA 3.2 y [Hibernate 7](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html)
 
 ## Testing Integracion 1
 
@@ -136,3 +138,13 @@ Los servicios web permiten:
     - Que lleguen bien los parametros
     - Que retorne el json que esperamos en el formato que esperamos
     - Que retorne errores en el formato que esperamos.
+
+## Troubleshooting
+
+- Si tenes este error:
+  - jakarta.servlet.ServletException: Request processing failed: java.lang.IllegalArgumentException: Name for argument
+    of type [int] not specified, and parameter name information not available via reflection. Ensure that the compiler
+    uses the '-parameters' flag.
+- En Settings > Build, Execution, Deployment > Compiler > Java Compiler, en Javac Options, agregar:
+  - -parameters
+- Luego ReBuild Project
