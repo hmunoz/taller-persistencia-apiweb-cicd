@@ -34,26 +34,29 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
 
 - Un contacto conoce una lista de números de teléfono
 - Un contacto posee un nombre que no debe tener más de 35 caracteres ni menos de 2.
-- No deben existir contactos con el mismo nombre.
 - Un número de teléfono tiene un código de área y el número en sí.
 - El código de áre tiene 4 dígitos el número un máximo de 7 caracteres y mínimo de 6.
 - Una agenda conoce todos sus contactos y permite listarlos.
 - La agenda permite agregar contactos.
+- No deben existir contactos con el mismo nombre.
 
 ## Testing Unitario
 
 ## Persistencia
 
-- Para persistencia usaremos JPA 3.2 y [Hibernate 7](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html)
+- Para persistencia usaremos JPA 3.2
+  y [Hibernate 7](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html)
 
 ## Testing Integracion 1
 
 - [Hibernate 7 Docs](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html#testing).
 
-## Servicios Web 
+## Servicios Web
 
-En términos de arquitectura de software, un `servicio` es una aplicación o proceso que se encuentra *escuchando* en un determinado host y puerto. Esperando recibir solicitudes de otros programas (clientes).
+En términos de arquitectura de software, un `servicio` es una aplicación o proceso que se encuentra *escuchando* en un
+determinado host y puerto. Esperando recibir solicitudes de otros programas (clientes).
 Un **servicio web** es un tipo especial de servicio que:
+
 - Utiliza protocolos web como HTTP o HTTPS para comunicarse,
 - Expone su funcionalidad a través de URLs,
 
@@ -73,45 +76,45 @@ Los servicios web permiten:
 
 ### 🔸 GET
 
-| Acción                 | URI ejemplo                      | Descripción                           |
-|------------------------|----------------------------------|---------------------------------------|
-| Obtener todos          | `GET /users`                     | Lista de usuarios                      |
-| Obtener uno            | `GET /users/{id}`                | Usuario por ID                         |
-| Sub-recursos           | `GET /users/{id}/posts`          | Posts del usuario                      |
-| Filtro con query params| `GET /products?category=zapatos` | Filtrar productos por categoría        |
+| Acción                  | URI ejemplo                      | Descripción                     |
+|-------------------------|----------------------------------|---------------------------------|
+| Obtener todos           | `GET /users`                     | Lista de usuarios               |
+| Obtener uno             | `GET /users/{id}`                | Usuario por ID                  |
+| Sub-recursos            | `GET /users/{id}/posts`          | Posts del usuario               |
+| Filtro con query params | `GET /products?category=zapatos` | Filtrar productos por categoría |
 
 ---
 
 ### 🔸 POST
 
-| Acción                 | URI ejemplo                  | Descripción                           |
-|------------------------|------------------------------|----------------------------------------|
-| Crear recurso          | `POST /users`                | Crear un nuevo usuario                 |
-| Crear sub-recurso      | `POST /users/{id}/telefonos` | Crear un post para ese usuario         |
+| Acción            | URI ejemplo                  | Descripción                    |
+|-------------------|------------------------------|--------------------------------|
+| Crear recurso     | `POST /users`                | Crear un nuevo usuario         |
+| Crear sub-recurso | `POST /users/{id}/telefonos` | Crear un post para ese usuario |
 
 ---
 
 ### 🔸 PUT
 
-| Acción                 | URI ejemplo                    | Descripción                           |
-|------------------------|---------------------------------|----------------------------------------|
-| Reemplazar recurso     | `PUT /users/{id}`              | Reemplaza completamente al usuario     |
+| Acción             | URI ejemplo       | Descripción                        |
+|--------------------|-------------------|------------------------------------|
+| Reemplazar recurso | `PUT /users/{id}` | Reemplaza completamente al usuario |
 
 ---
 
 ### 🔸 DELETE
 
-| Acción               | URI ejemplo         | Descripción                 |
-|----------------------|---------------------|-----------------------------|
-| Eliminar recurso     | `DELETE /users/{id}`| Borra un usuario por ID     |
+| Acción           | URI ejemplo          | Descripción             |
+|------------------|----------------------|-------------------------|
+| Eliminar recurso | `DELETE /users/{id}` | Borra un usuario por ID |
 
 ## Otros Casos
 
-| Caso                    | URI ejemplo                   | Descripción                              |
-|-------------------------|-------------------------------|-------------------------------------------|
-| Login                   | `POST /auth/login`            | Autenticación                             |
-| Logout                  | `POST /auth/logout`           | Cierre de sesión                          |
-| Acción puntual          | `POST /orders/{id}/cancel`    | Cancelar una orden                        |
+| Caso           | URI ejemplo                | Descripción        |
+|----------------|----------------------------|--------------------|
+| Login          | `POST /auth/login`         | Autenticación      |
+| Logout         | `POST /auth/logout`        | Cierre de sesión   |
+| Acción puntual | `POST /orders/{id}/cancel` | Cancelar una orden |
 
 ## ✅ Códigos de respuesta recomendados
 
@@ -122,29 +125,35 @@ Los servicios web permiten:
 | PUT    | `200 OK` / `204 No Content` | Actualización o creación de recurso    |
 | DELETE | `200 OK` / `204 No Content` | Ok o Eliminación exitosa sin contenido |
 
-###  SpringBoot
+### SpringBoot
 
 ### Exception Handling Global
-- Queremos manejar las excepciones de forma global y para ello el framework Web que usamos en general nos da una forma de hacerlo.
+
+- Queremos manejar las excepciones de forma global y para ello el framework Web que usamos en general nos da una forma
+  de hacerlo.
 - Usar `@RestControllerAdvice` para anotar una clase que maneje excepciones globalmente.
-- Dentro de esa clase, podemos definir métodos que manejen excepciones específicas usando `@ExceptionHandler(Exception.class)`.
+- Dentro de esa clase, podemos definir métodos que manejen excepciones específicas usando
+  `@ExceptionHandler(Exception.class)`.
 
 ### Testing Integracion 2
+
 - MockMvc and WebTestClient: [Spring Docs](https://docs.spring.io/spring-framework/reference/testing.html).
-- MockMvc ejecuta el controller y todo el stack en memoria, sin servidor, sin red. Perfecto para tests de integración rápidos y realistas a nivel de capa web.
-- La otra es WebTestCliente como cliente y levantar un server real con @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT o RANDOM_PORT))
-- Teniendo Tests escritos unitario y de integración a nivel servicio. ¿Qué podemos testear de la capa web?  
-  - Todo lo relacionado a las pocas líneas de código que debería haber en el controlador. Pero principalmente:
-    - Que lleguen bien los parametros
-    - Que retorne el json que esperamos en el formato que esperamos
-    - Que retorne errores en el formato que esperamos.
+- MockMvc ejecuta el controller y todo el stack en memoria, sin servidor, sin red. Perfecto para tests de integración
+  rápidos y realistas a nivel de capa web.
+- La otra es WebTestCliente como cliente y levantar un server real con @SpringBootTest(webEnvironment =
+  WebEnvironment.DEFINED_PORT o RANDOM_PORT))
+- Teniendo Tests escritos unitario y de integración a nivel servicio. ¿Qué podemos testear de la capa web?
+    - Todo lo relacionado a las pocas líneas de código que debería haber en el controlador. Pero principalmente:
+        - Que lleguen bien los parametros
+        - Que retorne el json que esperamos en el formato que esperamos
+        - Que retorne errores en el formato que esperamos.
 
 ## Troubleshooting
 
 - Si tenes este error:
-  - jakarta.servlet.ServletException: Request processing failed: java.lang.IllegalArgumentException: Name for argument
-    of type [int] not specified, and parameter name information not available via reflection. Ensure that the compiler
-    uses the '-parameters' flag.
+    - jakarta.servlet.ServletException: Request processing failed: java.lang.IllegalArgumentException: Name for argument
+      of type [int] not specified, and parameter name information not available via reflection. Ensure that the compiler
+      uses the '-parameters' flag.
 - En Settings > Build, Execution, Deployment > Compiler > Java Compiler, en Javac Options, agregar:
-  - -parameters
+    - -parameters
 - Luego ReBuild Project

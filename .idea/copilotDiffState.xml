@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/src/main/java/unrn/model/Agenda.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/main/java/unrn/model/Agenda.java" />
+              <option name="updatedContent" value="package unrn.model;&#10;&#10;import java.util.ArrayList;&#10;import java.util.Collections;&#10;import java.util.List;&#10;&#10;class Agenda {&#10;    private final List&lt;Contacto&gt; contactos = new ArrayList&lt;&gt;();&#10;&#10;    Agenda() {&#10;    }&#10;&#10;    void agregarContacto(String nombre, List&lt;NumeroTelefono&gt; telefonos) {&#10;        Contacto nuevo = new Contacto(nombre, telefonos, contactos);&#10;        contactos.add(nuevo);&#10;    }&#10;&#10;    List&lt;Contacto&gt; listarContactos() {&#10;        return Collections.unmodifiableList(contactos);&#10;    }&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/main/java/unrn/model/Telefono.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/src/main/java/unrn/model/Telefono.java" />
+              <option name="updatedContent" value="package unrn.model;&#10;&#10;public class Telefono {&#10;    private final String codigoArea;&#10;    private final String numero;&#10;&#10;    public Telefono(String codigoArea, String numero) {&#10;        if (codigoArea == null || !codigoArea.matches(&quot;\\d{4}&quot;)) {&#10;            throw new RuntimeException(&quot;El código de área debe tener exactamente 4 dígitos&quot;);&#10;        }&#10;        if (numero == null || numero.length() &lt; 6 || numero.length() &gt; 7) {&#10;            throw new RuntimeException(&quot;El número debe tener entre 6 y 7 caracteres&quot;);&#10;        }&#10;        this.codigoArea = codigoArea;&#10;        this.numero = numero;&#10;    }&#10;&#10;    // ...sin getters ni setters...&#10;}&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
