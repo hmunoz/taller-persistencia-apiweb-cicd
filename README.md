@@ -2,9 +2,45 @@
 
 - Para persistencia usaremos JPA 3.2 y [Hibernate 7](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html)
 
-## Diseño
+## Diseño Bottom-up vs Top-Down
 
-- Bottom-up vs Top-Down: Ninguno de los enfoques es el único ni definitivo; ambos tienen su lugar dependiendo de lo que estés haciendo. En soluciones grandes o empresariales, donde parte del diseño proviene de arquitectos (o ya existe de antemano), uno podría comenzar con el enfoque de estilo Top-Down. Por otro lado, cuando te encontrás en una situación donde no estás seguro de cómo debería ser tu código (o cómo debería encajar con otras partes del sistema), puede ser más fácil empezar con un componente de bajo nivel e ir dejándolo evolucionar a medida que se agregan más pruebas, refactorizaciones y requisitos.
+El diseño Top-Down consiste en comenzar con una visión general del sistema y descomponerla en partes más pequeñas y
+específicas. Primero se define la arquitectura, luego se diseñan los componentes individuales.
+
+El diseño Bottom-up consiste en construir primero componentes individuales o de bajo nivel (en Objetos es el Modelo de
+Dominio), y luego integrarlos con compontes de más alto nivel formando subsistemas y finalmente el sistema completo.
+
+## TDD Inside-out vs Outside-in
+
+El enfoque **inside-out** comienza escribiendo tests unitarios de bajo nivel sobre las clases del dominio, y
+gradualmente se construye hacia fuera, integrando otros componentes del sistema.
+
+- Se empieza por el **núcleo de la lógica de negocio**. En objetos, el modelo de dominio.
+- Los tests unitarios guían la implementación de clases individuales.
+- Luego se agregan capas externas como servicios, controladores, APIs.
+- Conocido como: método clásico, Chicago school.
+- **Menos riesgo** de escribir lógica fuera del modelo de dominio.
+- Poca necesidad de usar fakes/mocks.
+
+El enfoque **outside-in** comienza escribiendo tests de aceptación o de alto nivel desde el punto de vista del usuario o
+cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) para guiar el diseño interno.
+
+- Se parte del **comportamiento visible del sistema**.
+- Primero se escriben tests de aceptación o de capa externa (como APIs o UI).
+- Se crean objetos simulados (*fakes*) para las dependencias internas aún no implementadas.
+- El diseño interno emerge a medida que se satisfacen esos contratos.
+- Conocido como: London school, Mockist style
+- Aparece en el libro *Growing Object-Oriented Software, Guided by Tests*, de Steve Freeman y Nat Pryce.
+
+## Requerimientos
+
+- Una persona conoce sus números de teléfono
+- Una persona tiene un nombre, un apellido y un DNI.
+- El nombre y el apellido no puede debe tener mas de 35 caracteres ni menos de 2.
+- El DNI son solo numeros, de 7 u 8 dígitos.
+- No deben existir personas con el mismo DNI.
+- Un número de telefono tiene un código de área y el número en sí.
+- El código de áre tiene 4 dígitos el número un máximo de 7 caracteres y mínimo de 6.
 
 ## Testing Unitario
 
@@ -97,8 +133,8 @@ Los servicios web permiten:
 - MockMvc and WebTestClient: [Spring Docs](https://docs.spring.io/spring-framework/reference/testing.html).
 - MockMvc ejecuta el controller y todo el stack en memoria, sin servidor, sin red. Perfecto para tests de integración rápidos y realistas a nivel de capa web.
 - La otra es WebTestCliente como cliente y levantar un server real con @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT o RANDOM_PORT))
-- Teniendo Tests escritos unitario y de integración a nivel servicio, podemos probar la capa web.  
-  - Todo lo relacionado a las pocas lineas de código que deberia haber en el controlador. Pero principalmente:
-    - Qee lleguen bien los parametros
+- Teniendo Tests escritos unitario y de integración a nivel servicio. ¿Qué podemos testear de la capa web?  
+  - Todo lo relacionado a las pocas líneas de código que debería haber en el controlador. Pero principalmente:
+    - Que lleguen bien los parametros
     - Que retorne el json que esperamos en el formato que esperamos
     - Que retorne errores en el formato que esperamos.
