@@ -42,14 +42,36 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
 
 ## Testing Unitario
 
+- Usamos JUnit
+- Nombre claro y descriptivo de la forma: *cuestionATestear_resultadoEsperado*
+- Estructura del test:
+    - Setup: Preparar el escenario
+    - Ejercitación: Ejecutar la acción a probar
+    - Verificación: Comprobar el resultado esperado
+- Utiliza mensajes que expliquen el propósito de la verificación.
+    - Por ejemplo:
+      ```java
+      assertEquals(expectedValue, actualValue, "El valor esperado no coincide con el valor actual");
+      ```
+- Verifica excepciones correctamente
+    - Utiliza `assertThrows` para verificar que se lanza la excepción esperada.
+    - Ejemplo:
+      ```java
+        var ex = assertThrows(RuntimeException.class, () -> {
+                // Código que debería lanzar la excepción 
+            });
+            assertEquals("Mensaje de error esperado", ex.getMessage());
+        ```
+
 ## Persistencia
 
 - Para persistencia usaremos JPA 3.2
   y [Hibernate 7](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html)
 
-## Testing Integracion 1
+## Testing Integracion Servicios
 
 - [Hibernate 7 Docs](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html#testing).
+- Solo cambiamos la BD real para usar una en memoria.
 
 ## Servicios Web
 
@@ -135,7 +157,7 @@ Los servicios web permiten:
 - Dentro de esa clase, podemos definir métodos que manejen excepciones específicas usando
   `@ExceptionHandler(Exception.class)`.
 
-### Testing Integracion 2
+### Testing Integracion Servicios Web
 
 - MockMvc and WebTestClient: [Spring Docs](https://docs.spring.io/spring-framework/reference/testing.html).
 - MockMvc ejecuta el controller y todo el stack en memoria, sin servidor, sin red. Perfecto para tests de integración

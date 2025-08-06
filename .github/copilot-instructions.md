@@ -17,7 +17,7 @@
 - Los objetos se inicializan siempre por constructor, para generar siempre objetos completos, listos para usar.
 - Pone todas las validaciones en el constructor, siempre que sea posible, para instanciar objetos válidos.
 - Cuando lances exceptions, siempre usa RuntimeException. Y el mensaje de error ponelo en una constante estática con
-  visibilidad de paquete para poder usarla en los tests despues.
+  visibilidad de paquete para poder usarla en los tests después.
 - Cada validación de un constructor hacela en un método de instancia privado que se llama assert{LO_QUE_ESTAS_VALIDANDO}
 - Usa el principio tell don't ask siempre que sea posible. Por ejemplo: esto es INCORRECTO:
 
@@ -36,11 +36,11 @@ private void assertContactoUnico(Contacto contacto) {
 ### 1. Nombre claro y descriptivo
 
 - Nombra los métodos de test siguiendo este patrón:  
-  **`cuestionAEvaluar_resultadoEsperado`**
+  **`cuestionATestear_resultadoEsperado`**
 - Agrega la anotacion `@DisplayName` explicando en lenguaje natural el objetivo del test con este formato:
 
 ```java
-  @DisplayName("CuestionAEvaluar resultadoEsperado")
+  @DisplayName("CuestionATestear resultadoEsperado")
   ```
 
 ### 2. No uses Mock, Stubs o Fakes
@@ -83,7 +83,7 @@ private void assertContactoUnico(Contacto contacto) {
 - Números negativos o fuera de rango
 - Estados inválidos o excepciones esperadas
 
-### 7. Verificá excepciones correctamente
+### 7. Verifica excepciones correctamente
 
 - Utiliza `assertThrows` para verificar que se lanza la excepción esperada.
 - En general mi código lanzará RuntimeException, pero verificaló primero.
@@ -94,8 +94,8 @@ private void assertContactoUnico(Contacto contacto) {
         });
         assertEquals("Mensaje de error esperado", ex.getMessage());
     ```
-- Sobre el "Mensaje de error esperado", antes de poner a constante dura en el test verifica que la constante definida en
-  el codigo real y si es asi úsala.
+- Sobre el "Mensaje de error esperado", antes de poner una constante dura en el test verifica que la constante definida
+  en el codigo real y si es asi úsala.
 
 ### 8. Testing de Integración
 
