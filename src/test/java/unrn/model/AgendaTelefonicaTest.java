@@ -20,7 +20,7 @@ class AgendaTelefonicaTest {
         // Verificación
         List<Contacto> contactos = agenda.listarContactos();
         assertEquals(1, contactos.size(), "Debe haber un contacto en la agenda");
-        assertTrue(contactos.get(0).es("Juan"), "El contacto agregado debe ser 'Juan'");
+        assertTrue(contactos.get(0).esDe("Juan"), "El contacto agregado debe ser 'Juan'");
     }
 
     @Test

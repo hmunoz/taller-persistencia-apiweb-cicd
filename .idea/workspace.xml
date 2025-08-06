@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e9fb755-8ff6-4065-bcbe-8e50735b2e69" name="Changes" comment="agrego modelo de dominio">
-      <change afterPath="$PROJECT_DIR$/src/test/java/unrn/model/AgendaTelefonicaTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/unrn/model/ContactoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/unrn/model/NumeroTelefonoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copilotDiffState.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/copilotDiffState.xml" afterDir="false" />
+    <list default="true" id="3e9fb755-8ff6-4065-bcbe-8e50735b2e69" name="Changes" comment="ajustando el readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/unrn/model/NumeroTelefono.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/unrn/model/NumeroTelefono.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,22 +42,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.AgendaTelefonicaTest.executor": "Run",
-    "JUnit.ContactoTest.executor": "Run",
-    "JUnit.NumeroTelefonoTest.crearNumberoValido_retornaCodigoMasNumero.executor": "Run",
-    "JUnit.NumeroTelefonoTest.executor": "Run",
-    "JUnit.unrn.model in taller-persistencia-apiweb.executor": "Coverage",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "rearrange.code.on.save": "true",
-    "settings.editor.selected.configurable": "actions.on.save"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.AgendaTelefonicaTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ContactoTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.NumeroTelefonoTest.crearNumberoValido_retornaCodigoMasNumero.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.NumeroTelefonoTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.unrn.model in taller-persistencia-apiweb.executor&quot;: &quot;Coverage&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="JUnit.unrn.model in taller-persistencia-apiweb">
     <configuration name="AgendaTelefonicaTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="taller-persistencia-apiweb" />
@@ -167,6 +162,17 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="agrego modelo de dominio" />

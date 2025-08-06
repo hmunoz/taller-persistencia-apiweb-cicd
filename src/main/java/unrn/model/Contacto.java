@@ -32,7 +32,7 @@ public class Contacto {
         }
     }
 
-    public boolean es(String nombre) {
+    public boolean esDe(String nombre) {
         return this.nombre.equals(nombre);
     }
 }

@@ -13,7 +13,7 @@ class ContactoTest {
         // Setup & Ejercitación
         Contacto contacto = new Contacto("Juan");
         // Verificación
-        assertTrue(contacto.es("Juan"), "El contacto debe tener el nombre 'Juan'");
+        assertTrue(contacto.esDe("Juan"), "El contacto debe tener el nombre 'Juan'");
     }
 
     @Test
@@ -45,25 +45,25 @@ class ContactoTest {
         // Ejercitación
         contacto.nuevoNumero(telefono);
         // Verificación
-        assertTrue(contacto.es("Ana"), "El contacto debe seguir siendo 'Ana'");
+        assertTrue(contacto.esDe("Ana"), "El contacto debe seguir siendo 'Ana'");
     }
 
     @Test
     @DisplayName("El método es devuelve true si el nombre coincide")
-    void es_nombreCoincide_true() {
+    void es_De_nombreCoincide_true() {
         // Setup
         Contacto contacto = new Contacto("Pedro");
         // Ejercitación & Verificación
-        assertTrue(contacto.es("Pedro"), "Debe devolver true si el nombre coincide");
+        assertTrue(contacto.esDe("Pedro"), "Debe devolver true si el nombre coincide");
     }
 
     @Test
     @DisplayName("El método es devuelve false si el nombre no coincide")
-    void es_nombreNoCoincide_false() {
+    void es_De_nombreNoCoincide_false() {
         // Setup
         Contacto contacto = new Contacto("Pedro");
         // Ejercitación & Verificación
-        assertFalse(contacto.es("Juan"), "Debe devolver false si el nombre no coincide");
+        assertFalse(contacto.esDe("Juan"), "Debe devolver false si el nombre no coincide");
     }
 }
 

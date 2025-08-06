@@ -12,7 +12,7 @@ public class AgendaTelefonica {
     }
 
     public void agregarContacto(String nombre, NumeroTelefono telefono) {
-        var first = contactos.stream().filter(c -> c.es(nombre)).findFirst();
+        var first = contactos.stream().filter(c -> c.esDe(nombre)).findFirst();
         first.ifPresentOrElse(
                 (c) -> {
                     c.nuevoNumero(telefono);
