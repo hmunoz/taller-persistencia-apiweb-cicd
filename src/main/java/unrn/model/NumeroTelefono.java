@@ -4,16 +4,24 @@ public class NumeroTelefono {
     static final String ERROR_CODIGO_INVALIDO = "El código de área debe tener 4 dígitos";
     static final String ERROR_NUMERO_LARGO = "El número no debe tener más de 7 caracteres";
     static final String ERROR_NUMERO_CORTO = "El número debe tener al menos 6 caracteres";
+    static final String ERROR_NUMERO_INVALIDO = "El número no puede ser null";
 
     private final String codigoArea;
     private final String numero;
 
     NumeroTelefono(String codigoArea, String numero) {
         assertCodigoArea(codigoArea);
+        assertNumberInvalido(numero);
         assertNumeroLargo(numero);
         assertNumeroCorto(numero);
         this.codigoArea = codigoArea;
         this.numero = numero;
+    }
+
+    private void assertNumberInvalido(String numero) {
+        if (numero == null) {
+            throw new RuntimeException(ERROR_NUMERO_INVALIDO);
+        }
     }
 
     public String numero() {
