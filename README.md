@@ -68,6 +68,22 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
 - Para persistencia usaremos JPA 3.2
   y [Hibernate 7](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html)
 
+- Agregamos dependencias en pom.xml
+- Definimos cual clase representa el sistema.
+    - Será `AgendaTelefonica`
+    - No la vamos a mapear como entidad porque manejar los contactos como collecion mapeada uno a muchos, dado que la
+      cantidad de contactos puede ser grande sabemos que no performa bien.
+    - Esta clase representa la entrada a la lógica de negocios del sistema.
+    - Responsabilidades:
+        - Sus servicios reciben tipos primitivos, o estructuras de datos simples.
+        - Crea instancias del modelo, invoca sus servicios.
+        - persiste o remueve si es necesario.
+- Agrego Mapeos
+    - Entidades con Id`@Entity`, `@Id`
+    - Lombok: `@NoArgsConstructor(access = AccessLevel.PROTECTED)`, `@Getter(AccessLevel.PRIVATE)`, `@Setter(
+      AccessLevel.PRIVATE)`
+    - Y relaciones.
+
 ## Testing Integracion Servicios
 
 - [Hibernate 7 Docs](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html#testing).

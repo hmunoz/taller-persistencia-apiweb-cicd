@@ -1,13 +1,28 @@
 package unrn.model;
 
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter(AccessLevel.PRIVATE)
+@Setter(AccessLevel.PRIVATE)
 public class Contacto {
     static final String ERROR_NOMBRE_LARGO = "El nombre no debe tener más de 35 caracteres";
     static final String ERROR_NOMBRE_CORTO = "El nombre debe tener al menos 2 caracteres";
-    private final String nombre;
-    private final List<NumeroTelefono> telefonos;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String nombre;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "contacto_id")
+    private List<NumeroTelefono> telefonos;
 
     public Contacto(String nombre) {
         assertNombreLargo(nombre);
