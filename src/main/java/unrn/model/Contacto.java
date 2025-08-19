@@ -14,41 +14,42 @@ import java.util.List;
 @Getter(AccessLevel.PRIVATE)
 @Setter(AccessLevel.PRIVATE)
 public class Contacto {
-    static final String ERROR_NOMBRE_LARGO = "El nombre no debe tener más de 35 caracteres";
-    static final String ERROR_NOMBRE_CORTO = "El nombre debe tener al menos 2 caracteres";
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String nombre;
+    @Embedded
+    private NombreDeContacto nombre;
+
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "contacto_id")
     private List<NumeroTelefono> telefonos;
 
-    public Contacto(String nombre) {
-        assertNombreLargo(nombre);
-        assertNombreCorto(nombre);
+    public Contacto(NombreDeContacto nombre) {
         this.nombre = nombre;
         this.telefonos = new ArrayList<>();
+    }
+
+    public static Contacto of(NombreDeContacto nombre, NumeroTelefono numeroTelefono) {
+        var contacto = new Contacto(nombre);
+        contacto.nuevoNumero(numeroTelefono);
+        return contacto;
     }
 
     public void nuevoNumero(NumeroTelefono numeroTelefono) {
         this.telefonos.add(numeroTelefono);
     }
 
-    private void assertNombreLargo(String nombre) {
-        if (nombre.length() > 35) {
-            throw new RuntimeException(ERROR_NOMBRE_LARGO);
-        }
-    }
-
-    private void assertNombreCorto(String nombre) {
-        if (nombre.length() < 2) {
-            throw new RuntimeException(ERROR_NOMBRE_CORTO);
-        }
-    }
-
     public boolean esDe(String nombre) {
-        return this.nombre.equals(nombre);
+        return this.nombre.equals(new NombreDeContacto(nombre));
+    }
+
+    public int cantidadDeTelefonos() {
+        return this.telefonos.size();
+    }
+    
+    public boolean tieneElTelefono(String telefono) {
+        return this.telefonos.stream()
+                .anyMatch(numero -> numero.numero().equals(telefono));
     }
 }
 

@@ -8,7 +8,7 @@ public class Main {
         emf.runInTransaction(em -> {
             var n1 = new NumeroTelefono("1234", "456633");
             var n2 = new NumeroTelefono("1234", "788944");
-            var c = new Contacto("Juan Perez");
+            var c = new Contacto(new NombreDeContacto("Juan Perez"));
             c.nuevoNumero(n1);
             c.nuevoNumero(n2);
             em.persist(c);

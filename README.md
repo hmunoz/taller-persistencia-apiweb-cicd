@@ -83,6 +83,46 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
     - Lombok: `@NoArgsConstructor(access = AccessLevel.PROTECTED)`, `@Getter(AccessLevel.PRIVATE)`, `@Setter(
       AccessLevel.PRIVATE)`
     - Y relaciones.
+- Al implementar `AgendaTelefonica.agregarContacto(...)`
+    - Se vuelve necesario validar el nombre de contacto cuya validación se encuentra en `Contacto`.
+    - ¿Cómo reuso esa validación? Con un value object:`NombreDeContacto`.
+- Al implementar `AgendaTelefonica.listarContactos()`
+    - No puedo devolver grafos de objetos proxieados.
+    - Ademas tengo que paginar si devuelvo colecciones.
+
+### Repositories
+
+- For each type of object that needs global access, create an object that can provide the illusion of an in-memory
+  collection of all objects of that type. Set up access through a well-known global interface. Provide methods to *add*
+  and *remove* objects, which will encapsulate the actual insertion or removal of data in the data store. Provide
+  methods that *select objects based on some criteria* and return *fully instantiated objects* or collections of objects
+  whose attribute values meet the criteria, thereby encapsulating the actual storage and query technology.
+- Provide REPOSITORIES only for AGGREGATE roots that actually need direct access. Keep the client focused on the model,
+  delegating all object storage and access to the REPOSITORIES. Eric Evans DDD Book.
+- They decouple application and domain design from persistence technology, multiple database
+  strategies, or even multiple data sources. Eric Evans DDD Book.
+- A REPOSITORY lifts a huge burden from the client, which can now talk to a simple, intention-
+  revealing interface, and ask for what it needs in terms of the model. To support all this requires a
+  lot of complex technical infrastructure, but the interface is simple and conceptually connected to
+  the domain model. Eric Evans DDD Book.
+- Collection-like interface. Con semántica de un Set (sin repetidos). Eric Evans DDD Book.
+    - add(Contacto contacto)
+    - remove(Contacto contacto)
+    - Optional<Contacto> findByName(String name)
+    - Optional<Contacto> findById(Long id)
+    - List<Contacto> findXXX(...)
+- Un Repository por agregate root.
+- Se instancian recibiendo la transacción iniciado por quien lo inova.
+- Otra idea clave es que no necesitas "volver a guardar" los objetos modificados que ya están en el Repositorio.
+  Piensa nuevamente en cómo modificarías un objeto que forma parte de una colección. En realidad, es muy simple: solo
+  recuperarías de la colección la referencia al objeto que deseas modificar y luego le pedirías al objeto que ejecute
+  algún comportamiento de transición de estado invocando un método de comando. Implementing Domain Driven Design Vaughn
+  Vernon.
+    - Esto es posible por persistencia por alcance. No tiene que ver con el patron repositorio, sino que tiene que ver
+      con el ORM utilizado para implementar el repositorio.
+- La interfaz va junto al modelo, se diseña segun el modelo de dominio.
+- La implementación va en un paquete separado relacionado a la persistencia.
+- **No** va lógica de negocio en los repositorios.
 
 ## Testing Integracion Servicios
 

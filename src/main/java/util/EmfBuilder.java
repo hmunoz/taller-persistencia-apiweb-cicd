@@ -15,7 +15,7 @@ public class EmfBuilder {
     public static final String CLIENT_DB_URL = "jdbc:derby://localhost:1527/contactos;create=true";
     private EntityManagerFactory emf;
     private PersistenceConfiguration config;
-    private String testDataFileName = "test-data.sql";
+    private String testDataFileName = "tests-data.sql";
 
     public EmfBuilder() {
         config = new PersistenceConfiguration("miniTwitter")
@@ -47,7 +47,7 @@ public class EmfBuilder {
                 Action.SPEC_ACTION_DROP_AND_CREATE);
         return this;
     }
-    
+
     public EmfBuilder withTestData() {
         config.property(AvailableSettings.JAKARTA_HBM2DDL_LOAD_SCRIPT_SOURCE
                 , testDataFileName);

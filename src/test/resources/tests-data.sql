@@ -17,5 +17,8 @@ UPDATE NumeroTelefono SET contacto_id = 2 WHERE id = 3;
 UPDATE NumeroTelefono SET contacto_id = 3 WHERE id = 4;
 
 -- Ajusto las secuencias para futuros inserts
-ALTER TABLE Contacto ALTER COLUMN id RESTART WITH 4;
-ALTER TABLE NumeroTelefono ALTER COLUMN id RESTART WITH 5;
+DROP SEQUENCE Contacto_SEQ RESTRICT;
+CREATE SEQUENCE Contacto_SEQ START WITH 200 INCREMENT BY 50;
+
+DROP SEQUENCE NumeroTelefono_SEQ RESTRICT;
+CREATE SEQUENCE NumeroTelefono_SEQ START WITH 250 INCREMENT BY 50;

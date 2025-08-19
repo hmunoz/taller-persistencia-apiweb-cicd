@@ -19,14 +19,6 @@
             </PendingDiffInfo>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/src/test/resources/tests-data.sql">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/src/test/resources/tests-data.sql" />
-              <option name="updatedContent" value="-- Datos para tests: 3 contactos, 4 teléfonos&#10;&#10;-- Insertar contactos&#10;INSERT INTO Contacto (id, nombre) VALUES (1, 'Ana Torres');&#10;INSERT INTO Contacto (id, nombre) VALUES (2, 'Luis Pérez');&#10;INSERT INTO Contacto (id, nombre) VALUES (3, 'Mia Solis');&#10;&#10;-- Insertar teléfonos&#10;INSERT INTO NumeroTelefono (id, codigoArea, numero) VALUES (1, '0299', '1234567');&#10;INSERT INTO NumeroTelefono (id, codigoArea, numero) VALUES (2, '0299', '7654321');&#10;INSERT INTO NumeroTelefono (id, codigoArea, numero) VALUES (3, '0114', '654321');&#10;INSERT INTO NumeroTelefono (id, codigoArea, numero) VALUES (4, '0114', '234567');&#10;&#10;-- Relacionar teléfonos con contactos&#10;UPDATE NumeroTelefono SET contacto_id = 1 WHERE id IN (1,2);&#10;UPDATE NumeroTelefono SET contacto_id = 2 WHERE id = 3;&#10;UPDATE NumeroTelefono SET contacto_id = 3 WHERE id = 4;&#10;" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
       </map>
     </option>
   </component>

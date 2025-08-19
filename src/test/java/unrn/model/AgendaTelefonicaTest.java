@@ -1,60 +1,84 @@
 package unrn.model;
 
+import jakarta.persistence.EntityManagerFactory;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import util.EmfBuilder;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class AgendaTelefonicaTest {
+
+    private static EntityManagerFactory emf;
+    private AgendaTelefonica agenda;
+
+    @BeforeAll
+    static void beforeEverything() {
+//        emf = new EmfBuilder().memory().withTestData().withDropAndCreateDDL().build();
+        emf = new EmfBuilder().memory().withDropAndCreateDDL().build();
+    }
+
+    @BeforeEach
+    void beforeEach() {
+        // Truncate data before each test to ensure isolation
+        emf.getSchemaManager().truncate();
+
+        agenda = new AgendaTelefonica(emf);
+        agenda.agregarContacto("Ana Torres", "0299", "1234567");
+        agenda.agregarContacto("Ana Torres", "0299", "7654321");
+        agenda.agregarContacto("Luis Pérez", "0114", "654321");
+        agenda.agregarContacto("Mia Solis", "0114", "234567");
+    }
 
     @Test
     @DisplayName("Agregar un contacto nuevo lo almacena en la agenda")
     void agregarContactoNuevo_contactoSeAgrega() {
-        // Setup
-//        AgendaTelefonica agenda = new AgendaTelefonica();
-//        NumeroTelefono telefono = new NumeroTelefono("2991", "1234567");
-//        // Ejercitación
-//        agenda.agregarContacto("Juan", telefono);
-//        // Verificación
-//        List<Contacto> contactos = agenda.listarContactos();
-//        assertEquals(1, contactos.size(), "Debe haber un contacto en la agenda");
-//        assertTrue(contactos.get(0).esDe("Juan"), "El contacto agregado debe ser 'Juan'");
+        String nombre = "Juan Perez";
+        String codigoArea = "0299";
+        String telefono = "1234567";
+        // setup
+        agenda.agregarContacto(nombre, codigoArea, telefono);
+
+        // Assert
+        var contactos = agenda.listarContactos(1);
+        assertEquals(4, contactos.size(), "Debería haber exactamente un contacto");
+
+        var juanPerezOptional = contactos.stream().filter(c -> c.esDe(nombre)).findFirst();
+        var juanPerez = juanPerezOptional.get();
+        assertNotNull(juanPerez, "Juan Perez debería existir como contacto");
+        assertTrue(juanPerez.tieneElTelefono(codigoArea + " " + telefono), "Juan Perez debería tener un número de teléfono");
+        assertEquals(1, juanPerez.cantidadDeTelefonos(), "Juan Perez debería tener un número de teléfono");
     }
 
     @Test
     @DisplayName("Agregar un número a un contacto existente lo agrega correctamente")
     void agregarNumeroAContactoExistente_numeroSeAgrega() {
-        // Setup
-//        AgendaTelefonica agenda = new AgendaTelefonica();
-//        NumeroTelefono telefono1 = new NumeroTelefono("2991", "1234567");
-//        NumeroTelefono telefono2 = new NumeroTelefono("2991", "7654321");
-//        agenda.agregarContacto("Ana", telefono1);
-//        // Ejercitación
-//        agenda.agregarContacto("Ana", telefono2);
-//        // Verificación
-//        List<Contacto> contactos = agenda.listarContactos();
-//        assertEquals(1, contactos.size(), "Debe haber un solo contacto");
+        String nombre = "Mia Solis";
+        String codigoArea = "7898";
+        String telefono = "6589547";
+        // setup
+        agenda.agregarContacto(nombre, codigoArea, telefono);
+        //verificar
+        var contactos = agenda.listarContactos(1);
+        assertEquals(3, contactos.size(), "Debería haber exactamente 3 contactos");
+
+        var miaOptional = contactos.stream().filter(c -> c.esDe(nombre)).findFirst();
+        var mia = miaOptional.get();
+        assertNotNull(mia, "Mia debería existir como contacto");
+        assertTrue(mia.tieneElTelefono(codigoArea + " " + telefono), "Mia debería tener este número de teléfono");
+        assertTrue(mia.tieneElTelefono("0114 234567"), "Mia debería tener este número de teléfono");
+        assertEquals(2, mia.cantidadDeTelefonos(), "Juan Perez debería tener un número de teléfono");
     }
 
     @Test
-    @DisplayName("Listar contactos en agenda vacía devuelve lista vacía")
-    void listarContactos_agendaVacia_listaVacia() {
-        // Setup
-//        AgendaTelefonica agenda = new AgendaTelefonica();
-//        // Ejercitación
-//        List<Contacto> contactos = agenda.listarContactos();
-//        // Verificación
-//        assertTrue(contactos.isEmpty(), "La lista debe estar vacía si no hay contactos");
-    }
-
-    @Test
-    @DisplayName("La lista de contactos es solo lectura")
+    @DisplayName("Listar todos los contactos")
     void listarContactos_listaSoloLectura() {
-        // Setup
-//        AgendaTelefonica agenda = new AgendaTelefonica();
-//        NumeroTelefono telefono = new NumeroTelefono("2991", "1234567");
-//        agenda.agregarContacto("Pedro", telefono);
-//        List<Contacto> contactos = agenda.listarContactos();
-//        // Verificación
-//        assertThrows(UnsupportedOperationException.class, () -> contactos.add(new Contacto("Otro")), "No se puede modificar la lista de contactos");
+        var contactos = agenda.listarContactos(1);
+        assertEquals(3, contactos.size(), "Debería haber exactamente 3 contactos");
+
+        // Falta verificar que los contactos tienen los nombres los números correctos
     }
 }
 
