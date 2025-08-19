@@ -25,7 +25,7 @@ public class NumeroTelefono {
     private String codigoArea;
     private String numero;
 
-    NumeroTelefono(String codigoArea, String numero) {
+    public NumeroTelefono(String codigoArea, String numero) {
         assertCodigoArea(codigoArea);
         assertNumberInvalido(numero);
         assertNumeroLargo(numero);

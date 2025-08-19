@@ -120,7 +120,7 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
   Vernon.
     - Esto es posible por persistencia por alcance. No tiene que ver con el patron repositorio, sino que tiene que ver
       con el ORM utilizado para implementar el repositorio.
-- La interfaz va junto al modelo, se diseña segun el modelo de dominio.
+- La interfaz se diseña segun el modelo de dominio.
 - La implementación va en un paquete separado relacionado a la persistencia.
 - **No** va lógica de negocio en los repositorios.
 

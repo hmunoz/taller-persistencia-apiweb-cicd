@@ -1,11 +1,11 @@
-package unrn.model;
+package unrn.service;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import util.EmfBuilder;
+import unrn.util.EmfBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;
 
