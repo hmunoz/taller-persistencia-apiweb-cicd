@@ -101,7 +101,7 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
     - No re-testear lógica cubierta por tests del modelo.
     - Verifica persistencia real y recuperación de objetos de la BD
 
-### Repositories
+### Repositorios
 
 > For each type of object that needs global access, create an object that can provide the illusion of an in-memory
 > collection of all objects of that type. Set up access through a well-known global interface. Provide methods to *add*
