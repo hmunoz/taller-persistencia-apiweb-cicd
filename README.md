@@ -75,9 +75,10 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
       cantidad de contactos puede ser grande sabemos que no performa bien.
     - Esta clase representa la entrada a la lógica de negocios del sistema.
     - Responsabilidades:
+        - Gestiona las Transacciones
         - Sus servicios reciben tipos primitivos, o estructuras de datos simples.
-        - Crea instancias del modelo, invoca sus servicios.
-        - persiste o remueve si es necesario.
+        - Crea instancias del modelo, invoca sus servicios y los coordina.
+        - Persiste o remueve si es necesario.
 - Agrego Mapeos
     - Entidades con Id`@Entity`, `@Id`
     - Lombok: `@NoArgsConstructor(access = AccessLevel.PROTECTED)`, `@Getter(AccessLevel.PRIVATE)`, `@Setter(
@@ -89,6 +90,16 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
 - Al implementar `AgendaTelefonica.listarContactos()`
     - No puedo devolver grafos de objetos proxieados.
     - Ademas tengo que paginar si devuelvo colecciones.
+
+## Testing Integracion
+
+- [Hibernate 7 Docs](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html#testing).
+- ¿Qué testeamos aca?
+    - End to end desde la clase de entrada a mi modelo, hasta la BD
+    - Cambiamos la BD real para usar una en memoria (para que sea más rapido).
+    - Cada tests debe iniciar con la BD en el mismo estado (no hay dependencia entre los tests idealmente).
+    - No re-testear lógica cubierta por tests del modelo.
+    - Verifica persistencia real y recuperación de objetos de la BD
 
 ### Repositories
 
@@ -123,11 +134,6 @@ cliente. Luego se escriben los tests de colaboración entre objetos (con mocks) 
 - La interfaz va junto al modelo, se diseña segun el modelo de dominio.
 - La implementación va en un paquete separado relacionado a la persistencia.
 - **No** va lógica de negocio en los repositorios.
-
-## Testing Integracion Servicios
-
-- [Hibernate 7 Docs](https://docs.jboss.org/hibernate/orm/7.0/introduction/html_single/Hibernate_Introduction.html#testing).
-- Solo cambiamos la BD real para usar una en memoria.
 
 ## Servicios Web
 
