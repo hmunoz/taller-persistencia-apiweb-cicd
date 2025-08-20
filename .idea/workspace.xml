@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3e9fb755-8ff6-4065-bcbe-8e50735b2e69" name="Changes" comment="solo falta el test de integracion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/unrn/service/AgendaTelefonicaTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/unrn/service/AgendaTelefonicaTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755050840465</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="adding workspace.xml">
+      <option name="closed" value="true" />
+      <created>1755733949606</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1755733949606</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -217,7 +225,8 @@
     <MESSAGE value="agrego modelo de dominio" />
     <MESSAGE value="refactor nombre metodo es(...)" />
     <MESSAGE value="solo falta el test de integracion" />
-    <option name="LAST_COMMIT_MESSAGE" value="solo falta el test de integracion" />
+    <MESSAGE value="adding workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding workspace.xml" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
