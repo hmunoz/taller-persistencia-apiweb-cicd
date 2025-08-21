@@ -72,6 +72,7 @@ jobs:
       - name: SonarCloud Analysis
         run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=hmunoz_taller-cicd \
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
   deploy:
     runs-on: ubuntu-latest
