@@ -25,6 +25,11 @@ jobs:
           severity: HIGH,CRITICAL
           format: table
           output: trivy-report.txt
+      - name: Upload Trivy Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-report
+          path: trivy-report.txt
   install:
     runs-on: ubuntu-latest
     steps:
