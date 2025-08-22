@@ -71,7 +71,7 @@ jobs:
           name: jacoco-xml
           path: target/site/jacoco/
       - name: SonarCloud Analysis
-        run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+        run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.1.0.4751 \
             -Dsonar.projectKey=hmunoz_taller-cicd \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
