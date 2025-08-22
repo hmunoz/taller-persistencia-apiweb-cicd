@@ -11,6 +11,16 @@
     <properties>
         <sonar.organization>hmunoz</sonar.organization>
 
+        <!-- SonarCloud quality gates: fail build if there are critical issues -->
+        <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+        <sonar.qualitygate.break>true</sonar.qualitygate.break>
+        <sonar.qualitygate>Sonar way</sonar.qualitygate>
+        <sonar.failIfQualityGateNotPassed>true</sonar.failIfQualityGateNotPassed>
+        <sonar.bugs>0</sonar.bugs>
+        <sonar.vulnerabilities>0</sonar.vulnerabilities>
+        <sonar.critical_issues>0</sonar.critical_issues>
+        <sonar.code_smells>0</sonar.code_smells>
+
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -58,7 +68,32 @@
                             <goal>report</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
                 </executions>
+            <configuration>
+                <rules>
+                    <rule>
+                        <element>BUNDLE</element>
+                        <limits>
+                            <limit>
+                                <counter>LINE</counter>
+                                <value>COVEREDRATIO</value>
+                                <minimum>0.80</minimum>
+                            </limit>
+                            <limit>
+                                <counter>BRANCH</counter>
+                                <value>COVEREDRATIO</value>
+                                <minimum>0.80</minimum>
+                            </limit>
+                        </limits>
+                    </rule>
+                </rules>
+            </configuration>
             </plugin>
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
