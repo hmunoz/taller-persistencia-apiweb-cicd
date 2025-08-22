@@ -356,6 +356,21 @@ Para que el pipeline funcione correctamente, se agregaron las siguientes depende
 - El análisis de SonarCloud requiere el token de SonarCloud (`sonar.token`) y el project key (`sonar.projectKey`).
 - El despliegue a GitHub Pages usa el token `${{ secrets.GITHUB_TOKEN }}`.
 
-### Visualización de Reportes
 
-- El reporte de cobertura generado por JaCoCo se publica automáticamente en GitHub Pages, accesible desde la URL configurada en el workflow.
+### Quality Gates en SonarCloud
+
+El proyecto utiliza Quality Gates en SonarCloud para asegurar la calidad del código nuevo y existente. Las condiciones principales son:
+
+#### Condiciones sobre Nuevo Código
+
+- No se introducen nuevos bugs
+- El rating de confiabilidad es **A**
+- No se introducen nuevas vulnerabilidades
+- El rating de seguridad es **A**
+- La deuda técnica está limitada
+- El rating de mantenibilidad es **A**
+- Todos los nuevos security hotspots están revisados (**100%**)
+- El nuevo código tiene suficiente cobertura de tests (**>= 80%**)
+- El nuevo código tiene baja duplicación (**<= 3%** de líneas duplicadas)
+
+Estas condiciones se aplican tanto a ramas como a Pull Requests, y garantizan que el código que se incorpora al proyecto cumple con los estándares de calidad, seguridad y mantenibilidad definidos.
