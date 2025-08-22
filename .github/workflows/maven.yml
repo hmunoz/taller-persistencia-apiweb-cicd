@@ -22,9 +22,11 @@ jobs:
         with:
           scan-type: fs
           ignore-unfixed: true
-          severity: HIGH,CRITICAL
+          severity: HIGH,CRITICAL,LOW
           format: table
           output: trivy-report.txt
+      - name: Mostrar reporte Trivy en consola
+        run: cat trivy-report.txt
       - name: Upload Trivy Report
         uses: actions/upload-artifact@v4
         with:
