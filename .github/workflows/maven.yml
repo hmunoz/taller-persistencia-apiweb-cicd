@@ -53,6 +53,13 @@ jobs:
           cache: maven
       - name: Run JaCoCo Coverage
         run: mvn test jacoco:report --file pom.xml
+      - name: JaCoCo Coverage Check
+        uses: madrapps/jacoco-report@v1.6.1
+        with:
+          paths: ${{ github.workspace }}/target/site/jacoco/jacoco.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 80 # Porcentaje mínimo general
+          min-coverage-changed-files: 75 # Porcentaje mínimo en archivos modificados
       - name: Upload JaCoCo XML
         uses: actions/upload-artifact@v4
         with:
