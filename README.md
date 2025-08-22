@@ -233,3 +233,129 @@ Los servicios web permiten:
 - En Settings > Build, Execution, Deployment > Compiler > Java Compiler, en Javac Options, agregar:
     - -parameters
 - Luego ReBuild Project
+
+# CI/CD
+## SDK man
+sdk install java 23.0.2-amzn
+sdk use java 23.0.2-amzn
+java -version
+
+## CI/CD con GitHub Actions
+
+Este proyecto implementa un flujo de integración y despliegue continuo (CI/CD) usando GitHub Actions. El pipeline automatiza la instalación, testeo, análisis de cobertura, escaneo de seguridad, análisis de calidad y despliegue de reportes.
+
+### Flujo de trabajo (`.github/workflows/maven.yml`)
+
+1. **Security Scan**  
+   - Usa Trivy para escanear vulnerabilidades en el código y dependencias.
+   - Genera y sube un reporte de seguridad.
+
+2. **Instalación**  
+   - Instala dependencias usando Maven (`mvn install`).
+   - Configura JDK 23 con Temurin.
+
+3. **Testing**  
+   - Ejecuta los tests unitarios con Maven (`mvn test`).
+
+4. **Cobertura**  
+   - Genera el reporte de cobertura con JaCoCo (`mvn verify jacoco:report`).
+   - Sube el reporte XML de cobertura.
+
+5. **SonarCloud**  
+   - Descarga el reporte de cobertura.
+   - Ejecuta el análisis de calidad con SonarCloud usando el plugin de Maven y el token de SonarCloud.
+   - El reporte de cobertura se integra en el análisis.
+
+6. **Despliegue**  
+   - Genera nuevamente el reporte de cobertura.
+   - Configura GitHub Pages.
+   - Sube el reporte de cobertura a GitHub Pages para visualización web.
+
+### Dependencias y Plugins necesarios en `pom.xml`
+
+Para que el pipeline funcione correctamente, se agregaron las siguientes dependencias y plugins:
+
+- **JUnit Jupiter**  
+  Para testing unitario:
+  ```xml
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <version>5.13.4</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-params</artifactId>
+    <version>5.13.4</version>
+    <scope>test</scope>
+  </dependency>
+  ```
+
+- **JaCoCo Maven Plugin**  
+  Para generar reportes de cobertura:
+  ```xml
+  <plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.13</version>
+    <executions>
+      <execution>
+        <goals>
+          <goal>prepare-agent</goal>
+        </goals>
+      </execution>
+      <execution>
+        <id>report</id>
+        <phase>test</phase>
+        <goals>
+          <goal>report</goal>
+        </goals>
+      </execution>
+      <execution>
+        <id>check</id>
+        <goals>
+          <goal>check</goal>
+        </goals>
+      </execution>
+    </executions>
+    <configuration>
+      <rules>
+        <rule>
+          <element>BUNDLE</element>
+          <limits>
+            <limit>
+              <counter>LINE</counter>
+              <value>COVEREDRATIO</value>
+              <minimum>0.80</minimum>
+            </limit>
+            <limit>
+              <counter>BRANCH</counter>
+              <value>COVEREDRATIO</value>
+              <minimum>0.80</minimum>
+            </limit>
+          </limits>
+        </rule>
+      </rules>
+    </configuration>
+  </plugin>
+  ```
+
+- **Sonar Maven Plugin**  
+  Para análisis de calidad con SonarCloud:
+  ```xml
+  <plugin>
+    <groupId>org.sonarsource.scanner.maven</groupId>
+    <artifactId>sonar-maven-plugin</artifactId>
+    <version>5.1.0.4751</version>
+  </plugin>
+  ```
+
+### Variables y Tokens
+
+- El análisis de SonarCloud requiere el token de SonarCloud (`sonar.token`) y el project key (`sonar.projectKey`).
+- El despliegue a GitHub Pages usa el token `${{ secrets.GITHUB_TOKEN }}`.
+
+### Visualización de Reportes
+
+- El reporte de cobertura generado por JaCoCo se publica automáticamente en GitHub Pages, accesible desde la URL configurada en el workflow.
