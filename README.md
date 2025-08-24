@@ -271,6 +271,7 @@ Este proyecto implementa un flujo de integración y despliegue continuo (CI/CD) 
    - Configura GitHub Pages.
    - Sube el reporte de cobertura a GitHub Pages para visualización web.
 
+
 ### Dependencias y Plugins necesarios en `pom.xml`
 
 Para que el pipeline funcione correctamente, se agregaron las siguientes dependencias y plugins:
