@@ -1,8 +1,6 @@
 {
 	"name": "Java",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-
 	"features": {
 		"ghcr.io/devcontainers/features/java:1": {
 			"version": "23",
@@ -20,8 +18,7 @@
 				"GitHub.copilot"
 			]
 		}
-	}
-
-	,"remoteUser": "root"
-	
+	},
+	"postCreateCommand": "sudo apt-get update && apt-get install -y git-lfs",
+	"remoteUser": "root"
 }
