@@ -44,7 +44,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Maven Install
-        run: mvn install --file pom.xml
+        run: mvn install
 
   test:
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Maven Test
-        run: mvn test --file pom.xml
+        run: mvn test
 
   coverage:
     runs-on: ubuntu-latest
@@ -72,7 +72,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run JaCoCo Coverage
-        run: mvn verify jacoco:report --file pom.xml
+        run: mvn verify jacoco:report
       - name: Upload JaCoCo XML
         uses: actions/upload-artifact@v4
         with:

@@ -1,0 +1,10 @@
+<FindBugsFilter>
+    <Match>
+        <Bug pattern="CT_CONSTRUCTOR_THROW"/>
+        <Class name="unrn.model.Contacto"/>
+    </Match>
+    <Match>
+        <Bug pattern="CT_CONSTRUCTOR_THROW"/>
+        <Class name="unrn.model.NumeroTelefono"/>
+    </Match>
+</FindBugsFilter>

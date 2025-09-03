@@ -1,3 +1,4 @@
+
 # Taller - Persistencia, Servicios Web y Testing Automatizado
 
 ## Diseño Bottom-up vs Top-Down
@@ -375,3 +376,14 @@ El proyecto utiliza Quality Gates en SonarCloud para asegurar la calidad del có
 - El nuevo código tiene baja duplicación (**<= 3%** de líneas duplicadas)
 
 Estas condiciones se aplican tanto a ramas como a Pull Requests, y garantizan que el código que se incorpora al proyecto cumple con los estándares de calidad, seguridad y mantenibilidad definidos.
+
+
+## spotless-maven-plugin
+mvn verify
+mvn spotless:apply
+
+
+## spotbugs-maven-plugin
+mvn verify
+mvn spotbugs:check
+mvn spotbugs:gui
