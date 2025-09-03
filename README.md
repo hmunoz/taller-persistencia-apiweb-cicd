@@ -387,3 +387,56 @@ mvn spotless:apply
 mvn verify
 mvn spotbugs:check
 mvn spotbugs:gui
+---
+
+## Explicación de los plugins Maven utilizados
+
+### 1. maven-surefire-plugin
+- **¿Para qué sirve?** Permite ejecutar los tests unitarios y de integración durante el ciclo de vida de Maven.
+- **¿Cómo se usa?** Se ejecuta automáticamente al correr `mvn test` o `mvn verify`. Los resultados se guardan en la carpeta `target/surefire-reports`.
+
+### 2. jacoco-maven-plugin
+- **¿Para qué sirve?** Genera reportes de cobertura de código, mostrando qué porcentaje del código está cubierto por tests.
+- **¿Cómo se usa?** Se ejecuta en las fases `test` y `verify`. Al correr `mvn verify`, genera reportes en `target/site/jacoco`. Además, verifica que la cobertura mínima sea del 80% en líneas y ramas.
+
+### 3. sonar-maven-plugin
+**¿Para qué sirve?** Permite analizar la calidad del código usando SonarQube o SonarCloud.
+**¿Cómo se usa?**
+  - Para uso local, ejecuta:
+    ```
+    mvn sonar:sonar
+    ```
+    Requiere configuración adicional de SonarQube/SonarCloud.
+  - En CI/CD (por ejemplo, GitHub Actions), se recomienda ejecutar SonarCloud con:
+    ```
+    mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+      -Dsonar.projectKey=hmunoz_taller-cicd \
+      -Dsonar.token=TU_TOKEN \
+      -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+    ```
+    Esto permite pasar el project key, el token y el reporte de cobertura generado por JaCoCo, asegurando el análisis correcto en el pipeline.
+
+### 4. spotless-maven-plugin
+- **¿Para qué sirve?** Verifica y aplica formato al código Java usando Google Java Format.
+- **¿Cómo se usa?** Se ejecuta en la fase `verify` con:
+  ```
+  mvn spotless:check
+  ```
+  Para formatear automáticamente:
+  ```
+  mvn spotless:apply
+  ```
+
+### 5. spotbugs-maven-plugin
+**¿Para qué sirve?** Analiza el código en busca de posibles bugs y problemas de calidad.
+**¿Cómo se usa?**
+  - Se ejecuta en la fase `verify` con:
+    ```
+    mvn spotbugs:check
+    ```
+    Los resultados se guardan en `target/spotbugsXml.xml`. Usa el archivo `spotbugs-exclude.xml` para excluir reglas específicas.
+  - Para visualizar los resultados en una interfaz gráfica, ejecuta:
+    ```
+    mvn spotbugs:gui
+    ```
+    Esto abre una ventana donde puedes navegar y analizar los bugs detectados de forma visual.
