@@ -1,4 +1,3 @@
-
 # Taller - Persistencia, Servicios Web y Testing Automatizado
 
 ## Diseño Bottom-up vs Top-Down
@@ -378,16 +377,6 @@ El proyecto utiliza Quality Gates en SonarCloud para asegurar la calidad del có
 Estas condiciones se aplican tanto a ramas como a Pull Requests, y garantizan que el código que se incorpora al proyecto cumple con los estándares de calidad, seguridad y mantenibilidad definidos.
 
 
-## spotless-maven-plugin
-mvn verify
-mvn spotless:apply
-
-
-## spotbugs-maven-plugin
-mvn verify
-mvn spotbugs:check
-mvn spotbugs:gui
----
 
 ## Explicación de los plugins Maven utilizados
 
@@ -398,6 +387,102 @@ mvn spotbugs:gui
 ### 2. jacoco-maven-plugin
 - **¿Para qué sirve?** Genera reportes de cobertura de código, mostrando qué porcentaje del código está cubierto por tests.
 - **¿Cómo se usa?** Se ejecuta en las fases `test` y `verify`. Al correr `mvn verify`, genera reportes en `target/site/jacoco`. Además, verifica que la cobertura mínima sea del 80% en líneas y ramas.
+
+#### Sobre las `rules` en JaCoCo
+
+La sección `<rules>` permite definir condiciones de calidad sobre la cobertura de código. Cada `<rule>` especifica qué elemento analizar (por ejemplo, todo el bundle, una clase, un método) y qué límites debe cumplir.
+
+Por ejemplo, en la configuración actual:
+
+```xml
+<rules>
+  <rule>
+    <element>BUNDLE</element>
+    <limits>
+      <limit>
+        <counter>LINE</counter>
+        <value>COVEREDRATIO</value>
+        <minimum>0.80</minimum>
+      </limit>
+      <limit>
+        <counter>BRANCH</counter>
+        <value>COVEREDRATIO</value>
+        <minimum>0.80</minimum>
+      </limit>
+    </limits>
+  </rule>
+</rules>
+```
+
+- `<element>BUNDLE</element>`: Aplica la regla a todo el proyecto.
+- `<counter>LINE</counter>`: Analiza la cobertura de líneas de código.
+- `<counter>BRANCH</counter>`: Analiza la cobertura de ramas (if, switch, etc).
+- `<value>COVEREDRATIO</value>`: Verifica el porcentaje cubierto.
+- `<minimum>0.80</minimum>`: Exige al menos 80% de cobertura.
+
+Si la cobertura es menor al mínimo, la build falla en la fase `verify`.
+
+##### Otras reglas posibles
+
+Puedes agregar reglas para distintos elementos y métricas, por ejemplo:
+
+- Cobertura mínima por clase:
+  ```xml
+  <rule>
+    <element>CLASS</element>
+    <limits>
+      <limit>
+        <counter>LINE</counter>
+        <value>COVEREDRATIO</value>
+        <minimum>0.70</minimum>
+      </limit>
+    </limits>
+  </rule>
+  ```
+
+- Cobertura de métodos:
+  ```xml
+  <rule>
+    <element>METHOD</element>
+    <limits>
+      <limit>
+        <counter>INSTRUCTION</counter>
+        <value>COVEREDRATIO</value>
+        <minimum>0.90</minimum>
+      </limit>
+    </limits>
+  </rule>
+  ```
+
+- Número máximo de clases sin cobertura:
+  ```xml
+  <rule>
+    <element>CLASS</element>
+    <limits>
+      <limit>
+        <counter>LINE</counter>
+        <value>MISSEDCOUNT</value>
+        <maximum>0</maximum>
+      </limit>
+    </limits>
+  </rule>
+  ```
+
+- Cobertura de instrucciones:
+  ```xml
+  <rule>
+    <element>BUNDLE</element>
+    <limits>
+      <limit>
+        <counter>INSTRUCTION</counter>
+        <value>COVEREDRATIO</value>
+        <minimum>0.85</minimum>
+      </limit>
+    </limits>
+  </rule>
+  ```
+
+Puedes combinar varias reglas para exigir diferentes métricas de calidad en distintos niveles (proyecto, clase, método).
 
 ### 3. sonar-maven-plugin
 **¿Para qué sirve?** Permite analizar la calidad del código usando SonarQube o SonarCloud.
