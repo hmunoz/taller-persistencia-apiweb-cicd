@@ -24,7 +24,7 @@ public class AgendaTelefonica {
         });
   }
 
-  List<Contacto> listarContactos() {
+  public List<Contacto> listarContactos() {
     return Collections.unmodifiableList(contactos);
   }
 }
