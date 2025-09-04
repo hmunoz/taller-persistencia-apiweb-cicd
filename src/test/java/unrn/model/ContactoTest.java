@@ -39,6 +39,15 @@ class ContactoTest {
   }
 
   @Test
+  @DisplayName("Crear contacto con nombre nulo lanza excepción")
+  void crearContacto_nombreNulo_lanzaExcepcion() {
+    // Setup & Ejercitación & Verificación
+    var ex = assertThrows(RuntimeException.class, () -> new Contacto(null));
+    assertEquals(
+        Contacto.ERROR_NOMBRE_NULO, ex.getMessage(), "Debe lanzar excepción por nombre nulo");
+  }
+
+  @Test
   @DisplayName("Agregar un nuevo número a un contacto lo almacena correctamente")
   void nuevoNumero_agregaNumero() {
     // Setup

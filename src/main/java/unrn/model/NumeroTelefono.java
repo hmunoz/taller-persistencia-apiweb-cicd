@@ -9,7 +9,7 @@ public class NumeroTelefono {
   private final String codigoArea;
   private final String numero;
 
-  NumeroTelefono(String codigoArea, String numero) {
+  public NumeroTelefono(String codigoArea, String numero) {
     assertCodigoArea(codigoArea);
     assertNumberInvalido(numero);
     assertNumeroLargo(numero);

@@ -6,10 +6,12 @@ import java.util.List;
 public class Contacto {
   static final String ERROR_NOMBRE_LARGO = "El nombre no debe tener más de 35 caracteres";
   static final String ERROR_NOMBRE_CORTO = "El nombre debe tener al menos 2 caracteres";
+  static final String ERROR_NOMBRE_NULO = "El nombre no puede ser null";
   private final String nombre;
   private final List<NumeroTelefono> telefonos;
 
   public Contacto(String nombre) {
+    assertNombreNulo(nombre);
     assertNombreLargo(nombre);
     assertNombreCorto(nombre);
     this.nombre = nombre;
@@ -18,6 +20,12 @@ public class Contacto {
 
   public void nuevoNumero(NumeroTelefono numeroTelefono) {
     this.telefonos.add(numeroTelefono);
+  }
+
+  private void assertNombreNulo(String nombre) {
+    if (nombre == null) {
+      throw new RuntimeException(ERROR_NOMBRE_NULO);
+    }
   }
 
   private void assertNombreLargo(String nombre) {
