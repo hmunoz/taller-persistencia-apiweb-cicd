@@ -15,6 +15,9 @@ on:
 jobs:
   analyze-and-assign:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
