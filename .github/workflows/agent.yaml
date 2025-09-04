@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Generate Repomix Report
-        uses: yamadashy/repomix-action@v1
+        uses: yamadashy/repomix/.github/actions/repomix@main
         with:
           output: 'repomix-report.md'
           format: 'markdown'
