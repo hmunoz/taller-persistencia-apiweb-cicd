@@ -22,19 +22,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Generate Repomix Report
-        uses: yamadashy/repomix/.github/actions/repomix@main
-        with:
-          additional-args: '--no-install' # <-- ESTA ES LA LÍNEA CORRECTA
-          output: repomix-output.md
-          style: markdown
-      
-      - name: Upload Repomix output
-        uses: actions/upload-artifact@v4
-        with:
-          name: repomix-report.md
-          path: repomix-report.md
-          retention-days: 30
+   
 
       - name: Create Issue with Repomix Report and Assign to Copilot
         env:
@@ -42,6 +30,6 @@ jobs:
         run: |
           gh issue create \
             --title "Copilot Analysis Task: Review Repository Structure" \
-            --body-file repomix-report.md \
+            --body-file repomix-output.md \
             --assignee "@copilot" \
             --label "copilot-analysis"
