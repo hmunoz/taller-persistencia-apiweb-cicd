@@ -31,5 +31,5 @@ jobs:
           gh issue create \
             --title "Copilot Analysis Task: Review Repository Structure" \
             --body-file repomix-output.md \
-            --assignee "hmunoz" \
+            --assignee "github-copilot[bot]" \
             --label "copilot-analysis"
