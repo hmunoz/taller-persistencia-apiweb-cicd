@@ -1,0 +1,43 @@
+
+name: IA agent
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  analyze-and-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate Repomix Report
+        uses: yamadashy/repomix-action@v1
+        with:
+          output: 'repomix-report.md'
+          format: 'markdown'
+      
+      - name: Upload Repomix output
+        uses: actions/upload-artifact@v4
+        with:
+          name: repomix-report.md
+          path: repomix-report.md
+          retention-days: 30
+
+      - name: Create Issue with Repomix Report and Assign to Copilot
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Copilot Analysis Task: Review Repository Structure" \
+            --body-file repomix-report.md \
+            --assignee "@copilot" \
+            --label "copilot-analysis"

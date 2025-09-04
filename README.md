@@ -331,10 +331,13 @@ Para que el pipeline funcione correctamente, se agregaron las siguientes depende
               <minimum>0.80</minimum>
             </limit>
             <limit>
+
               <counter>BRANCH</counter>
               <value>COVEREDRATIO</value>
               <minimum>0.80</minimum>
-            </limit>
+              </limit>
+
+              > **Cobertura de rama (`BRANCH`)**: Se refiere al porcentaje de caminos lógicos que han sido ejecutados por los tests. Por ejemplo, si tienes una condición `if`, JaCoCo considera dos ramas: una donde la condición es verdadera y otra donde es falsa. Para tener cobertura total de rama, tus tests deben ejecutar ambos caminos. Esto aplica también para estructuras como `else`, `switch`, bucles, etc. Así, la cobertura de rama asegura que los tests verifican todos los posibles flujos de decisión del código, no solo que se ejecuten las líneas.
           </limits>
         </rule>
       </rules>
