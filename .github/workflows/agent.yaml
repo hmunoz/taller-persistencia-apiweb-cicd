@@ -22,6 +22,7 @@ jobs:
       - name: Generate Repomix Report
         uses: yamadashy/repomix/.github/actions/repomix@main
         with:
+          install_dependencies: false # Add this line
           output: repomix-output.md
           style: markdown
       
