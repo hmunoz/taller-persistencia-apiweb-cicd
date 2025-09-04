@@ -21,8 +21,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      
+      - name: Instalar repomix
+        run: npm install -g repomix
 
-   
+      - name: Generar reporte con repomix
+        run: repomix --style markdown --output repomix-output.md
 
       - name: Create Issue with Repomix Report and Assign to Copilot
         env:
@@ -31,5 +35,5 @@ jobs:
           gh issue create \
             --title "Copilot Analysis Task: Review Repository Structure" \
             --body-file repomix-output.md \
-            --assignee "copilot" \
+            --assignee "hmunoz" \
             --label "copilot-analysis"
