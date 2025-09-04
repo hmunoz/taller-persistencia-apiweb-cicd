@@ -22,8 +22,8 @@ jobs:
       - name: Generate Repomix Report
         uses: yamadashy/repomix/.github/actions/repomix@main
         with:
-          output: 'repomix-report.md'
-          format: 'markdown'
+          output: repomix-output.md
+          style: markdown
       
       - name: Upload Repomix output
         uses: actions/upload-artifact@v4
